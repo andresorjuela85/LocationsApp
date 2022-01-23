@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HnT-OO-x76">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HnT-OO-x76">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,22 +18,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="CB7-q0-ltj">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                             </mapView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CB7-q0-ltj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8xG-O8-ZUC"/>
-                            <constraint firstItem="CB7-q0-ltj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="K9V-fG-k3e"/>
+                            <constraint firstItem="CB7-q0-ltj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="K9V-fG-k3e"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CB7-q0-ltj" secondAttribute="trailing" id="gR1-CO-qi3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="CB7-q0-ltj" secondAttribute="bottom" id="nu4-6p-fWN"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="MAP" id="5zo-pF-DlI"/>
                     <navigationItem key="navigationItem" id="B4r-a8-IVW">
                         <barButtonItem key="rightBarButtonItem" id="suq-2R-6mW">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KkQ-S6-u43">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="KkQ-S6-u43">
                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
@@ -56,22 +58,40 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IJI-Nx-lol">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27L-qf-wGM">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="MwB-g7-8xj">
+                                        <rect key="frame" x="188.5" y="344" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="MwB-g7-8xj" firstAttribute="centerY" secondItem="27L-qf-wGM" secondAttribute="centerY" id="2vh-HW-nss"/>
+                                    <constraint firstItem="MwB-g7-8xj" firstAttribute="centerX" secondItem="27L-qf-wGM" secondAttribute="centerX" id="NoB-8b-T4x"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="2vY-EJ-VhM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="27L-qf-wGM" firstAttribute="leading" secondItem="2vY-EJ-VhM" secondAttribute="leading" id="Jb9-kZ-4oz"/>
                             <constraint firstItem="2vY-EJ-VhM" firstAttribute="trailing" secondItem="IJI-Nx-lol" secondAttribute="trailing" id="Kvm-dz-5D4"/>
                             <constraint firstItem="2vY-EJ-VhM" firstAttribute="bottom" secondItem="IJI-Nx-lol" secondAttribute="bottom" id="QuU-4W-sFR"/>
+                            <constraint firstItem="2vY-EJ-VhM" firstAttribute="trailing" secondItem="27L-qf-wGM" secondAttribute="trailing" id="WSB-ec-TUA"/>
                             <constraint firstItem="IJI-Nx-lol" firstAttribute="leading" secondItem="2vY-EJ-VhM" secondAttribute="leading" id="faI-mZ-irK"/>
+                            <constraint firstItem="2vY-EJ-VhM" firstAttribute="bottom" secondItem="27L-qf-wGM" secondAttribute="bottom" id="igd-8Q-kuQ"/>
                             <constraint firstItem="IJI-Nx-lol" firstAttribute="top" secondItem="2vY-EJ-VhM" secondAttribute="top" id="rhs-gh-BXP"/>
+                            <constraint firstItem="27L-qf-wGM" firstAttribute="top" secondItem="2vY-EJ-VhM" secondAttribute="top" id="zUZ-j1-Lxs"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="2vY-EJ-VhM"/>
                     </view>
                     <navigationItem key="navigationItem" title="PLACE" id="pR7-s6-5D6">
                         <barButtonItem key="backBarButtonItem" title=" " id="mVE-as-32w"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="loaderView" destination="27L-qf-wGM" id="s3g-WD-dvD"/>
                         <outlet property="locationList" destination="IJI-Nx-lol" id="HhY-pO-yG6"/>
                         <segue destination="gbx-oD-HPo" kind="show" identifier="thirdViewSegue" id="8aO-hu-PsU"/>
                     </connections>
@@ -92,14 +112,14 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </mapView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="gaJ-Th-lLU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="gaJ-Th-lLU" firstAttribute="bottom" secondItem="Vgo-9m-ADx" secondAttribute="bottom" id="64v-6A-RJI"/>
                             <constraint firstItem="Vgo-9m-ADx" firstAttribute="leading" secondItem="gaJ-Th-lLU" secondAttribute="leading" id="6Zi-WN-8T2"/>
                             <constraint firstItem="Vgo-9m-ADx" firstAttribute="top" secondItem="gaJ-Th-lLU" secondAttribute="top" id="6in-Ja-kaI"/>
                             <constraint firstItem="gaJ-Th-lLU" firstAttribute="trailing" secondItem="Vgo-9m-ADx" secondAttribute="trailing" id="kqi-JE-7ZU"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="gaJ-Th-lLU"/>
                     </view>
                     <navigationItem key="navigationItem" id="0rN-l8-Hf0"/>
                     <connections>
@@ -149,4 +169,9 @@
             <point key="canvasLocation" x="1950.7246376811595" y="675"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

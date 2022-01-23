@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct Location: Decodable {
+struct Location: Codable {
     
     let type: String?
     let properties: Properties
     let geometry: Geometry
 }
 
-struct Properties: Decodable {
+struct Properties: Codable {
     
     let name: String?
     let street: String?
@@ -38,7 +38,7 @@ struct Properties: Decodable {
     
 }
 
-struct Datasource: Decodable {
+struct Datasource: Codable {
     
     let sourcename: String?
     let attribution: String?
@@ -47,7 +47,7 @@ struct Datasource: Decodable {
     
 }
 
-struct Geometry: Decodable {
+struct Geometry: Codable {
     
     let type: String?
     let coordinates: [Double]?

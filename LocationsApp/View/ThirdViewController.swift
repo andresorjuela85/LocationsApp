@@ -36,14 +36,19 @@ class ThirdViewController: UIViewController {
 }
 
 extension ThirdViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    let image = annotation as? Pin
-    let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
-    view.animatesDrop = true
-    view.canShowCallout = true
-    let thumbnailImageView = UIImageView(frame: CGRect(x:0, y:0, width: 59, height: 59))
-    thumbnailImageView.image = image?.thumbImage
-    view.leftCalloutAccessoryView = thumbnailImageView
-    return view
+        
+        let image = annotation as? Pin
+        let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        
+        view.animatesDrop = true
+        view.canShowCallout = true
+        
+        let thumbnailImageView = UIImageView(frame: CGRect(x:0, y:0, width: 59, height: 59))
+        thumbnailImageView.image = image?.thumbImage
+        view.leftCalloutAccessoryView = thumbnailImageView
+        
+        return view
     }
 }

@@ -13,7 +13,7 @@ class SecondViewController: UIViewController {
     var selectedLocation: [Location] = []
     var location: Location?
     
-    
+    @IBOutlet weak var loaderView: UIView!
     @IBOutlet private weak var locationList: UITableView!
     
     override func viewDidLoad() {
@@ -22,15 +22,20 @@ class SecondViewController: UIViewController {
         // Do any additional setup after loading the view.
         let service = GetLocations()
         
+        loaderView.isHidden = false
+        
         service.getLocation { locationsReceived in
             
-            if let locationsReceived = locationsReceived {
-                self.selectedLocation = locationsReceived
-                self.locationList.dataSource = self
-                self.locationList.delegate = self
-                self.locationList.reloadData()
+            DispatchQueue.main.async {
+                self.loaderView.isHidden = true
+                
+                if let locationsReceived = locationsReceived {
+                    self.selectedLocation = locationsReceived
+                    self.locationList.dataSource = self
+                    self.locationList.delegate = self
+                    self.locationList.reloadData()
+                }
             }
-            
         }
         
         self.locationList.register(UINib(nibName: "locationCell", bundle: nil), forCellReuseIdentifier: "reuse")

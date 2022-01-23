@@ -15,12 +15,6 @@ class locationCell: UITableViewCell {
     @IBOutlet weak var addresTwo: UILabel!
     @IBOutlet weak var distance: UILabel!
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func configure (location: Location) {
         
        // let dimension = CGSize(width: 60, height: 60)
@@ -52,12 +46,6 @@ class locationCell: UITableViewCell {
         addresOne.text = location.properties.address_line1
         addresTwo.text = location.properties.address_line2
         
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }

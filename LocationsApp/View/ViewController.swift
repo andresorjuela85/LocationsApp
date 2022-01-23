@@ -29,15 +29,26 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let service = GetLocations()
-        service.getLocation { (locationsReceived) in
+        service.getLocation { [weak self] (locationsReceived) in
+            
+            guard let self = self else { return }
             
             if let locationsReceived = locationsReceived {
                 self.selectLocation = locationsReceived
                 self.point = self.selectLocation.count
                 while self.i < self.point {
                     let loc = self.selectLocation[self.i]
-                    let pin = Pin(coordinate: CLLocationCoordinate2D(latitude: loc.properties.lat!, longitude: loc.properties.lon!), title: loc.properties.address_line1!, subtitle: loc.properties.address_line2!, category: (loc.properties.categories?.last)!)
-                    self.mapView.addAnnotation(pin)
+                    
+                    if let lat = loc.properties.lat,
+                       let lon = loc.properties.lon,
+                       let last = loc.properties.categories?.last {
+                        
+                        let pin = Pin(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon), title: loc.properties.address_line1!, subtitle: loc.properties.address_line2!, category: last)
+                        
+                        DispatchQueue.main.async {
+                            self.mapView.addAnnotation(pin)
+                        }
+                    }
                     self.i = self.i+1
                   //  self.centerViewOnUser()
                     self.mapView.delegate = self
@@ -136,7 +147,7 @@ class ViewController: UIViewController {
             break
         case .notDetermined:
            
-            break
+            location.requestWhenInUseAuthorization()
         case .restricted:
            
             break
