@@ -10,7 +10,7 @@
         <!--MAP-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LocationsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="LocationsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,7 +49,7 @@
         <!--PLACE-->
         <scene sceneID="tSz-1H-h5c">
             <objects>
-                <viewController id="IiH-bG-H3K" customClass="SecondViewController" customModule="LocationsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IiH-bG-H3K" customClass="SecondViewController" customModule="LocationsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZJD-CF-V0Y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,12 +58,29 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHB-Fb-UEp">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="AoR-eF-zfD">
+                                        <rect key="frame" x="197" y="394" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="AoR-eF-zfD" firstAttribute="centerY" secondItem="rHB-Fb-UEp" secondAttribute="centerY" id="OsF-B5-EnU"/>
+                                    <constraint firstItem="AoR-eF-zfD" firstAttribute="centerX" secondItem="rHB-Fb-UEp" secondAttribute="centerX" id="fO7-cQ-nBw"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="rHB-Fb-UEp" firstAttribute="leading" secondItem="2vY-EJ-VhM" secondAttribute="leading" id="B7p-uM-EpJ"/>
                             <constraint firstItem="2vY-EJ-VhM" firstAttribute="trailing" secondItem="IJI-Nx-lol" secondAttribute="trailing" id="Kvm-dz-5D4"/>
+                            <constraint firstItem="2vY-EJ-VhM" firstAttribute="trailing" secondItem="rHB-Fb-UEp" secondAttribute="trailing" id="Pf6-3g-217"/>
                             <constraint firstItem="2vY-EJ-VhM" firstAttribute="bottom" secondItem="IJI-Nx-lol" secondAttribute="bottom" id="QuU-4W-sFR"/>
+                            <constraint firstAttribute="bottom" secondItem="rHB-Fb-UEp" secondAttribute="bottom" id="SOD-zh-gNi"/>
                             <constraint firstItem="IJI-Nx-lol" firstAttribute="leading" secondItem="2vY-EJ-VhM" secondAttribute="leading" id="faI-mZ-irK"/>
+                            <constraint firstItem="rHB-Fb-UEp" firstAttribute="top" secondItem="2vY-EJ-VhM" secondAttribute="top" id="hKO-MY-gts"/>
                             <constraint firstItem="IJI-Nx-lol" firstAttribute="top" secondItem="2vY-EJ-VhM" secondAttribute="top" id="rhs-gh-BXP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2vY-EJ-VhM"/>
@@ -72,6 +89,8 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="mVE-as-32w"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="AoR-eF-zfD" id="ytF-X5-SNc"/>
+                        <outlet property="loaderView" destination="rHB-Fb-UEp" id="Nar-7k-pNK"/>
                         <outlet property="locationList" destination="IJI-Nx-lol" id="HhY-pO-yG6"/>
                         <segue destination="gbx-oD-HPo" kind="show" identifier="thirdViewSegue" id="8aO-hu-PsU"/>
                     </connections>

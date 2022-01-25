@@ -15,20 +15,28 @@ class SecondViewController: UIViewController {
     
     
     @IBOutlet private weak var locationList: UITableView!
+    @IBOutlet weak var loaderView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
         let service = GetLocations()
+        
+        loaderView.isHidden = false
         
         service.getLocation { locationsReceived in
             
-            if let locationsReceived = locationsReceived {
-                self.selectedLocation = locationsReceived
-                self.locationList.dataSource = self
-                self.locationList.delegate = self
-                self.locationList.reloadData()
+            DispatchQueue.main.async {
+                self.loaderView.isHidden = true
+                
+                if let locationsReceived = locationsReceived {
+                    self.selectedLocation = locationsReceived
+                    self.locationList.dataSource = self
+                    self.locationList.delegate = self
+                    self.locationList.reloadData()
+                }
             }
             
         }
@@ -44,7 +52,7 @@ class SecondViewController: UIViewController {
             thirdView.showLocation = location
         }
     }
-
+    
 }
 
 extension SecondViewController: UITableViewDataSource {
@@ -60,6 +68,9 @@ extension SecondViewController: UITableViewDataSource {
         }
         
         list.configure(location: selectedLocation[indexPath.row])
+        if let lat = selectedLocation[indexPath.row].properties.lat, let lon = selectedLocation[indexPath.row].properties.lon {
+            list.distance(latTwo: lat, longTwo: lon)
+        }
         return list
     }
     

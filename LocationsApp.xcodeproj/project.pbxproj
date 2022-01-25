@@ -16,6 +16,7 @@
 		8F0DECDA2798E511000D4D7E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8F0DECD92798E511000D4D7E /* Alamofire */; };
 		8F0DECDE2798E54F000D4D7E /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0DECDD2798E54F000D4D7E /* Locations.swift */; };
 		8F0DECE02798FCB6000D4D7E /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0DECDF2798FCB6000D4D7E /* Pin.swift */; };
+		8F73E27B279F82E900F92C25 /* PinUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73E27A279F82E900F92C25 /* PinUser.swift */; };
 		8F7F2B35279AF5D000F22F54 /* getLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F2B34279AF5D000F22F54 /* getLocations.swift */; };
 		8F7F2B39279B07F200F22F54 /* locationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F2B37279B07F200F22F54 /* locationCell.swift */; };
 		8F7F2B3A279B07F200F22F54 /* locationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F2B38279B07F200F22F54 /* locationCell.xib */; };
@@ -34,6 +35,7 @@
 		8F0DECD22798E428000D4D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F0DECDD2798E54F000D4D7E /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
 		8F0DECDF2798FCB6000D4D7E /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		8F73E27A279F82E900F92C25 /* PinUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PinUser.swift; path = ../PinUser.swift; sourceTree = "<group>"; };
 		8F7F2B34279AF5D000F22F54 /* getLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getLocations.swift; sourceTree = "<group>"; };
 		8F7F2B37279B07F200F22F54 /* locationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationCell.swift; sourceTree = "<group>"; };
 		8F7F2B38279B07F200F22F54 /* locationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = locationCell.xib; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				8F0DECC42798E424000D4D7E /* AppDelegate.swift */,
 				8F0DECC62798E424000D4D7E /* SceneDelegate.swift */,
 				8F0DECDF2798FCB6000D4D7E /* Pin.swift */,
+				8F73E27A279F82E900F92C25 /* PinUser.swift */,
 				8F0DECCA2798E424000D4D7E /* Main.storyboard */,
 				8F0DECCD2798E428000D4D7E /* Assets.xcassets */,
 				8F0DECCF2798E428000D4D7E /* LaunchScreen.storyboard */,
@@ -199,6 +202,7 @@
 				8F0DECC92798E424000D4D7E /* ViewController.swift in Sources */,
 				8F0DECC52798E424000D4D7E /* AppDelegate.swift in Sources */,
 				8F0DECDE2798E54F000D4D7E /* Locations.swift in Sources */,
+				8F73E27B279F82E900F92C25 /* PinUser.swift in Sources */,
 				8F0DECC72798E424000D4D7E /* SceneDelegate.swift in Sources */,
 				8F7F2B39279B07F200F22F54 /* locationCell.swift in Sources */,
 			);

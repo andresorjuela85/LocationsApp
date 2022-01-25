@@ -53,8 +53,3 @@ struct Geometry: Decodable {
     let coordinates: [Double]?
 }
 
-
-/*
- 
- 
- */

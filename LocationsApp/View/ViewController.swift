@@ -8,15 +8,14 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     
-    let location = CLLocationManager()
+    let locationManager = CLLocationManager()
     let range: Double = 40000
-    //let pointer = UIImageView(image: UIImage(systemName: "mappin"))
-    //let pin = MKAnnotation.self
     var myPointLat: Double?
     var myPointLong: Double?
     var myPoint: CLLocationCoordinate2D?
@@ -24,10 +23,12 @@ class ViewController: UIViewController {
     var point = 0
     var i = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
+        checkLocationServices()
+      
         let service = GetLocations()
         service.getLocation { (locationsReceived) in
             
@@ -36,162 +37,88 @@ class ViewController: UIViewController {
                 self.point = self.selectLocation.count
                 while self.i < self.point {
                     let loc = self.selectLocation[self.i]
-                    let pin = Pin(coordinate: CLLocationCoordinate2D(latitude: loc.properties.lat!, longitude: loc.properties.lon!), title: loc.properties.address_line1!, subtitle: loc.properties.address_line2!, category: (loc.properties.categories?.last)!)
-                    self.mapView.addAnnotation(pin)
+                    if let lat = loc.properties.lat, let lon = loc.properties.lon,
+                        let addressOne = loc.properties.address_line1, let addressTwo = loc.properties.address_line2,
+                        let last = loc.properties.categories?.last {
+                        let pin = Pin(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon), title: addressOne, subtitle: addressTwo, category: last)
+                        self.mapView.addAnnotation(pin)
+                    }
                     self.i = self.i+1
-                  //  self.centerViewOnUser()
                     self.mapView.delegate = self
                 }
             }
         }
         
-        checkLocationServices()
-        /*
-        
-         */
-        mapView.showsUserLocation = true
-        //location.stopUpdatingLocation()
-        //centerViewOnUser()
-        mapView.centerCoordinate = CLLocationCoordinate2D(latitude: 4.55015605, longitude: -74.24083797857142)
-        location.desiredAccuracy = kCLLocationAccuracyBest
-        //mapView.showsUserLocation = true
-        //centerViewOnUser()
-        mapView.isZoomEnabled = true
-        //pointer.translatesAutoresizingMaskIntoConstraints = false
-        //pointer.tintColor = .red
-        //view.addSubview(pointer)
-        /*
-        point = selectLocation.count
-        print(selectLocation.count)
-        while i < point {
-            let loc = selectLocation[i]
-            let pin = Pin(coordinate: CLLocationCoordinate2D(latitude: loc.properties.lat!, longitude: loc.properties.lon!))
-            mapView.addAnnotation(pin)
-            i = i+1
-            print(i)
-        }
-        */
-      //  let pin = Pin(coordinate: mapView.centerCoordinate)
-       // mapView.addAnnotation(pin)
-      //  let pinTwo = Pin(coordinate: CLLocationCoordinate2D(latitude: 4.495135100000001, longitude: -74.25815818555029))
-      //  mapView.addAnnotation(pinTwo)
-        
-      //  let myPin = Pin(coordinate: myPoint!)
-      //  mapView.addAnnotation(myPin)
-        
-        //NSLayoutConstraint.activate([
-         //   pointer.centerYAnchor.constraint(equalTo: mapView.centerYAnchor, constant: -14.5),
-          //  pointer.centerXAnchor.constraint(equalTo: mapView.centerXAnchor)
-        //])
-        //mapView.showsUserLocation = true
-        //centerViewOnUser()
-        
     }
-
+    
     
     func centerViewOnUser() {
-     //  guard let myLocation = location.location?.coordinate else {
-       //     print("No entra")
-     //       return
-     //  }
+        guard let myLocation = locationManager.location?.coordinate else {
+            myPointLat = 4.579956599324831
+            myPointLong = -74.08750386243297
+
+            if let myPointLat = myPointLat, let myPointLong = myPointLong {
+                myPoint = CLLocationCoordinate2D(latitude: myPointLat, longitude: myPointLong)
+                if let myPoint = myPoint {
+                    let coordinateRegion = MKCoordinateRegion.init(center: myPoint, latitudinalMeters: range, longitudinalMeters: range)
+                    mapView.setRegion(coordinateRegion, animated: true)
+                    let pinUser = PinUser(coordinate: myPoint)
+                    mapView.addAnnotation(pinUser)
+                }
+            }
+            return
+        }
         
-       // print(myLocation.latitude)
-       // print(myLocation.longitude)
-        let coordinateRegion = MKCoordinateRegion.init(center: mapView.centerCoordinate, latitudinalMeters: range, longitudinalMeters: range)
+        let coordinateRegion = MKCoordinateRegion.init(center: myLocation, latitudinalMeters: range, longitudinalMeters: range)
         mapView.setRegion(coordinateRegion, animated: true)
-       // myPoint = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
-       // myPointLat = myLocation.latitude
-       // myPointLong = myLocation.longitude
+        myPoint = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
+        myPointLat = myLocation.latitude
+        myPointLong = myLocation.longitude
     }
     
     func checkLocationServices() {
         guard CLLocationManager.locationServicesEnabled() else  {
             return
         }
-        location.delegate = self
-        location.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         checkAuthorization()
     }
     
-   
+    
     func checkAuthorization() {
         
-        print("Aqui entra")
         switch CLLocationManager.authorizationStatus() {
             
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
             centerViewOnUser()
-            location.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
             
             break
         case .authorizedAlways:
             mapView.showsUserLocation = true
             centerViewOnUser()
-            location.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
             break
         case .denied:
             
             break
         case .notDetermined:
-           
+            locationManager.requestWhenInUseAuthorization()
             break
         case .restricted:
-           
+            
             break
         default:
             
             break
         }
     }
-
+    
 }
-/*
- private func checkAuthorizationForLocation() {
-     switch CLLocationManager.authorizationStatus() {
-     case .authorizedWhenInUse, .authorizedAlways:
-         mapView.showsUserLocation = true
-         locationManager.startUpdatingLocation()
-         break
-     case .denied:
-         // Here we must tell user how to turn on location on device
-         break
-     case .notDetermined:
-         locationManager.requestWhenInUseAuthorization()
-     case .restricted:
-             // Here we must tell user that the app is not authorize to use location services
-         break
-     @unknown default:
-         break
-     }
- }
- */
 
-/*
- 
- func centerViewOnUser() {
-       let centerRegion = MKCoordinateRegion.init(center: selectedMap.centerCoordinate, latitudinalMeters: range, longitudinalMeters: range)
-       selectedMap.setRegion(centerRegion, animated: true)
-   }
- private let pointer = UIImageView(image: UIImage(systemName: "mappin"))
-
- private func layoutUI() {
-     ...
-     pointer.translatesAutoresizingMaskIntoConstraints = false
-     pointer.tintColor = .red
-     ...
-     view.addSubview(pointer)
-         
-     NSLayoutConstraint.activate([
-         ...
-         pointer.centerYAnchor.constraint(equalTo: mapView.centerYAnchor, constant: -14.5),
-         pointer.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
-         pointer.widthAnchor.constraint(equalToConstant: 27),
-         pointer.heightAnchor.constraint(equalToConstant: 29)
-     ])
- }
- */
 
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -208,14 +135,15 @@ extension ViewController: MKMapViewDelegate {
 
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
         checkAuthorization()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+    
     }
 }
 
 /*
- 
+ 4.579956599324831, -74.08750386243297
  */
